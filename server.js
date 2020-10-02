@@ -7,6 +7,7 @@ var bodyparser = require('body-parser');
 var cors = require('cors');
 const dns = require('dns')
 var app = express();
+const shortid = require('shortid');
 
 // Basic Configuration 
 var port = process.env.PORT || 3000;
@@ -36,10 +37,11 @@ app.get('/', function(req, res){
 });
 
 //url shortner
-app.post('/api/shorturl/new', (req,res,next)=>{
+app.post('/api/shorturl/new', async(req,res,next)=>{
   
   let url = new URL(req.body.url).host;
-
+  //shortid library can be used in place of 
+  //randomNum() to generate unique shortened_urls.
   function randomNum() {
     let min = 0;
     let max = 50;
